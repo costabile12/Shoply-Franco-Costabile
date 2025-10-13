@@ -5,7 +5,7 @@ import { Header } from './components/Header'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Footer } from './components/Footer';
 import { Main } from './components/Main';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import {Home} from "./pages/Home"
 import {About} from "./pages/About"
 import {Contact} from "./pages/Contact"
@@ -83,7 +83,7 @@ function App() {
   return (
     <div className="App d-flex flex-column  min-vh-100">
 
-      <Router basename="/Shoply-Franco-Costabile/">
+      
           <Header carrito={cart} handleClean={handlecleanCart} handleDeleteProductCart={handleDeleteProductCart} handleIncreanseQuantity={handleIncreanseQuantity} handleDecreanseQuantity={handleDecreanseQuantity} />
           <Main>
                 <Routes>
@@ -113,7 +113,7 @@ function App() {
                 </Routes>
           </Main>
           <Footer />
-      </Router>
+      
 
     </div>
   )
