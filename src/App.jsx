@@ -83,7 +83,7 @@ function App() {
   return (
     <div className="App d-flex flex-column  min-vh-100">
 
-      <Router>
+      <Router basename="/Shoply-Franco-Costabile/">
           <Header carrito={cart} handleClean={handlecleanCart} handleDeleteProductCart={handleDeleteProductCart} handleIncreanseQuantity={handleIncreanseQuantity} handleDecreanseQuantity={handleDecreanseQuantity} />
           <Main>
                 <Routes>
