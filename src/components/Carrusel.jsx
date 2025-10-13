@@ -42,7 +42,7 @@ export const Carrusel = () => {
                 <Carousel.Caption className="text-shadow-dark">
                     <h3 className="titleCarrusel">{banner.name}</h3>
                     <p className="textCarrusel">{banner.description}</p>
-                    <Button role="button" href="/#allProducts" className="btn btn-dark btn-outline-light btn-lg " aria-label="See products" title="See products">Products</Button>
+                    <a role="button" href="#allProducts" className="btn btn-dark btn-outline-light btn-lg " aria-label="See products" title="See products">Products</a>
                     </Carousel.Caption>
             </Carousel.Item>
         ))}
