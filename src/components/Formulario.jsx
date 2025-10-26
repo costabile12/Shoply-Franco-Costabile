@@ -165,8 +165,13 @@ export const Formulario = () => {
                         as="textarea"
                         placeholder="Leave a comment here"
                         style={{ height: '100px' }}
+                        required
                        
                     />
+                    <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                    <Form.Control.Feedback type="invalid">                       
+                        Please write your message
+                    </Form.Control.Feedback>
                 </Form.Group>
             </Row>
             

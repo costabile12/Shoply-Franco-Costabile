@@ -1,14 +1,15 @@
-import React from "react"
+import React, { useContext } from "react"
 
 
 import "../styles/custom.css"
 import { Button } from "react-bootstrap";
+import { CarritoContext } from "../context/CarritoContext";
 
 
-export const ItemCarrito = ({ producto, handleDeleteProductCart, handleIncreanseQuantity, handleDecreanseQuantity}) => {
+export const ItemCarrito = ({ producto }) => {
 
 
-
+    const { handleDeleteProductCart, handleIncreanseQuantity, handleDecreanseQuantity} = useContext(CarritoContext);
 
 
     return(
@@ -23,13 +24,13 @@ export const ItemCarrito = ({ producto, handleDeleteProductCart, handleIncreanse
             </div>
 
             <div className="d-flex align-items-center gap-2">
-                <button className="btn btn-secondary" onClick={() => handleDecreanseQuantity(producto.id)}>-</button>
+                <Button className="btn btn-secondary" onClick={() => handleDecreanseQuantity(producto.id)}>-</Button>
                 <span>{producto.cantidad}</span>
-                <button className="btn btn-secondary" onClick={() => handleIncreanseQuantity(producto.id)}>+</button>
+                <Button className="btn btn-secondary" onClick={() => handleIncreanseQuantity(producto.id)}>+</Button>
 
-                <button className="btn btn-danger ms-2" onClick={() => handleDeleteProductCart(producto)}>
+                <Button className="btn btn-danger ms-2" onClick={() => handleDeleteProductCart(producto)}>
                 X
-                </button>
+                </Button>
             </div>
         </section>
     )

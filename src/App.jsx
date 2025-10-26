@@ -16,67 +16,12 @@ import { Electronics } from './pages/Electronics';
 import { ExchangesReturns } from './pages/ExcgangesReturns';
 import { Shipping } from './pages/Shipping';
 import { Branches } from './pages/Branches';
-import { useEffect, useState } from 'react';
 import { Login } from './pages/Login';
 import { Admin } from './pages/Admin';
+import { RutaProtegida } from './components/RutaProtegida';
+import { DetalleProducto } from './pages/DetalleProducto';
 
 function App() {
-
-  const [cart, setCart] = useState(()=>{
-    const savedCart = localStorage.getItem("carrito");
-    return savedCart ? JSON.parse(savedCart) : [];
-  });
-
-  const handleAddToCart = (product) => {
-
-    const exist = cart.find((item)=> item.id === product.id);
-
-    if(exist){
-      //Si ya está, aumentamos la cantidad
-      setCart(
-        cart.map(item => item.id === product.id ?
-            {...item, cantidad: item.cantidad+1}: item )
-      );
-    }else {
-      // Si no está en el carrito, lo agego con cantidad 1
-      setCart(
-        [...cart, {...product, cantidad:1}]
-        
-      );
-      alert(`Se agrego ${product.title} al carrito`);
-    }
-
-    
-    
-
-  };
-
-  const handlecleanCart = () => {
-    setCart([]);
-    
-  }
-
-  const handleDeleteProductCart = (product) => {
-    let newCart = cart.filter((item) => item.id != product.id);
-    setCart(newCart);
-    alert(`Se elimino ${product.title} del carrito`)
-  };
-
-  const handleIncreanseQuantity = (id) => {
-    setCart(
-      cart.map( item => item.id===id ? {...item, cantidad: item.cantidad +1}: item)
-    )
-  }
-
-  const handleDecreanseQuantity = (id) => {
-    setCart(
-      cart.map(item => item.id === id ? {...item, cantidad: item.cantidad-1}:item).filter(item => item.cantidad > 0)
-    )
-  }
-
-  useEffect(()=> {
-    localStorage.setItem("carrito",JSON.stringify(cart));
-  },[cart])
 
 
 
@@ -84,20 +29,20 @@ function App() {
     <div className="App d-flex flex-column  min-vh-100">
 
       
-          <Header carrito={cart} handleClean={handlecleanCart} handleDeleteProductCart={handleDeleteProductCart} handleIncreanseQuantity={handleIncreanseQuantity} handleDecreanseQuantity={handleDecreanseQuantity} />
+          <Header />
           <Main>
                 <Routes>
-                    <Route path="/" element={<Home handleAddToCart={handleAddToCart}/>} />
+                    <Route path="/" element={<Home />} />
                     
                     <Route path="/about" element={<About />} />
 
-                    <Route path="/mens-clothing" element={<MensClothing  handleAddToCart={handleAddToCart}/>} />
+                    <Route path="/mens-clothing" element={<MensClothing />} />
 
-                    <Route path="/womens-clothing" element={<WomensClothing  handleAddToCart={handleAddToCart}/>} />
+                    <Route path="/womens-clothing" element={<WomensClothing />} />
 
-                    <Route path="/jewelery" element={<Jewelery handleAddToCart={handleAddToCart}/>} />
+                    <Route path="/jewelery" element={<Jewelery />} />
 
-                    <Route path="/electronics" element={<Electronics handleAddToCart={handleAddToCart}/>} />
+                    <Route path="/electronics" element={<Electronics />} />
 
                     <Route path='/exchanges-returns' element={<ExchangesReturns />} />
 
@@ -109,7 +54,13 @@ function App() {
 
                     <Route path='/login' element={<Login />} />
 
-                    <Route path='/admin' element={<Admin />} />
+                    <Route path='/producto/:id' element={<DetalleProducto />}/>
+                    
+                    <Route path='/admin' element={
+                      <RutaProtegida>
+                        <Admin />
+                      </RutaProtegida>  
+                    } />
                 </Routes>
           </Main>
           <Footer />

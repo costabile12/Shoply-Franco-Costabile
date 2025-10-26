@@ -1,10 +1,40 @@
+import { useState } from "react";
 import { Container, Row, Col, Form, Button, Card } from "react-bootstrap"
+import { useAuthContext } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 export const Login = () => {
 
-    const handleSubmit = (e) => {
+    const [user, setUsuario] = useState("");
+    const [password, setPassword] = useState("");
+    const {login} = useAuthContext();
+    const navigate = useNavigate();
+    
+
+    const handleLogin = (e) => {
+        
         e.preventDefault();
-        alert('Login enviado');
+        
+        if(user === "admin" && password === "1234") {
+            login(user);
+            Swal.fire({
+                title: "Login successful!!",
+                text: "Welcome back, admin!",
+                icon: "success",
+                timer: 2000,
+                showConfirmButton: false,
+            });
+
+            navigate("/admin");
+        } else {
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Incorrect username or password",
+                
+            });
+        }
     };
 
     return (
@@ -14,15 +44,27 @@ export const Login = () => {
             <Card className="shadow-lg p-4 ">
                 <Card.Body>
                 <h2 className="text-center mb-4">Login</h2>
-                <Form onSubmit={handleSubmit}>
+                <Form onSubmit={handleLogin} noValidate >
                     <Form.Group className="mb-3" controlId="formUsername">
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control type="email" placeholder="Enter your E-mail" required  pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"/>
+                    <Form.Label>Username</Form.Label>
+                    <Form.Control 
+                    type="text" 
+                    placeholder="Enter your username" 
+                    required
+                    autoComplete="username"
+                    onChange={(e)=>setUsuario(e.target.value)} />
+
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="formPassword">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Enter your password" required />
+                    <Form.Control 
+                    type="password" 
+                    placeholder="Enter your password" 
+                    required
+                    autoComplete="current-password"
+                    onChange={(e)=>setPassword(e.target.value)} />
+
                     </Form.Group>
 
                     <Button variant="dark" type="submit" className="w-100">

@@ -1,23 +1,19 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
-
 import { Tarjeta } from "./Tarjeta";
 import { Cargar } from "./Cargar";
 import { ErrorMessage } from "./ErrorMessage";
-
 import { useState,useEffect } from "react";
-
 import "../styles/custom.css"
 
-export const Gallery = ({category, addToCart}) => {
+export const Gallery = ({category}) => {
     
+
     const [products, setProducts] = useState([]);
     const [error, setError] = useState(null);
     const [cargando, setCargando] = useState(true);
 
       useEffect(()=>{
-    
-        
     
         const fetchProducts = async () => {
           let url = "https://fakestoreapi.com/products";
@@ -66,7 +62,7 @@ export const Gallery = ({category, addToCart}) => {
                         <Tarjeta 
                             producto = {product}
                             key={product.id}
-                            addToCart={addToCart}
+                            
                         />
                     </Col>
                 ))}

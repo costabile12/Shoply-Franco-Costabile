@@ -1,16 +1,72 @@
-import {Container, Navbar, Nav, NavDropdown, Form, Button  } from "react-bootstrap";
+import {Container, Navbar, Nav, NavDropdown, Form, Button, Row, Col, Card  } from "react-bootstrap";
 import "../styles/custom.css"
 import Logo from '../assets/img/logo.png';
 import "../styles/custom.css"
 import { Carrito } from "./Carrito";
-
-import {Link} from "react-router-dom"
+import { useAuthContext } from "../context/AuthContext";
+import {Link, useNavigate} from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faUser, faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons';
+import {faUser, faMagnifyingGlass, faRightFromBracket} from '@fortawesome/free-solid-svg-icons';
+import Swal from "sweetalert2";
+import { useEffect, useState } from "react";
+import { ErrorMessage } from "./ErrorMessage";
+import { Cargar } from "./Cargar";
  
-export const Navegation = ({carrito, handleClean, handleDeleteProductCart, handleIncreanseQuantity, handleDecreanseQuantity}) => {
+export const Navegation = () => {
 
+    const navigate = useNavigate();
+    const {token} = useAuthContext();
+    const {logout} = useAuthContext();
+    const [busqueda, setBusqueda] = useState("");
+    const [products, setProducts] = useState([]);
+    const [cargando, setCargando] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(()=>{
+        const fetchProducts = async () => {
+          let url = "https://fakestoreapi.com/products";
+          try {
+            const res = await fetch(url);
+            if(!res.ok) {
+              if(res.status === 404) {
+                throw new Error("No se encontraron los productos (404)");
+              }else {
+                throw new Error(`Error HTTP: ${res.status}`);
+              }
+            }
+            const data = await res.json();
+            setProducts(data || []);
         
+          }catch(err){
+            setError(err.message);
+          }finally {
+            setCargando(false);
+          }
+        };
+    
+        fetchProducts();
+    },[]);
+
+    const handleLogout = () => {
+        logout();
+        Swal.fire({
+            icon: "info",
+            title: "Logged out",
+            text: "You have successfully logged out.",
+            timer: 2000,
+            showConfirmButton: false,
+        });
+        navigate("/login")
+        
+        
+
+    }
+
+    const filtrados = products.filter((p)=> p.title.toLowerCase().includes(busqueda.toLowerCase()));
+
+
+    if(cargando) return <Cargar />
+    if(error) return <ErrorMessage mensaje={error} />
 
     return(
         <>
@@ -35,28 +91,39 @@ export const Navegation = ({carrito, handleClean, handleDeleteProductCart, handl
                     </NavDropdown>
                     <Nav.Link as={Link} to="/about">About</Nav.Link>
                     <Nav.Link as={Link} to="/contact">Contact</Nav.Link>
-                    <Nav.Link as={Link} to="/admin" disabled>
-                        Admin
-                    </Nav.Link>
+
+                    {/* Solo se muestra si esta autenticado */}
+                    {token && (
+                        <Nav.Link as={Link} to="/admin" >Admin</Nav.Link>
+                    ) }
+                    
                 </Nav>
 
                 
                 
                 
-                    <Form className="d-flex ms-auto align-items-center">
-                    <Form.Control type="text" placeholder="Search" className="me-2" />
-                    <Button type="submit" className="btn btn-dark mx-2" aria-label="Search" title="Search">
+                    <Form 
+                    className="d-flex ms-auto align-items-center"  
+                    onSubmit={(e) => e.preventDefault()}>
+                    <Form.Control type="text" placeholder="Search" className="me-2"  value={busqueda} onChange={(e) => setBusqueda(e.target.value)}/>
+                    <Button type="submit" className="btn btn-dark mx-2" aria-label="Search" title="Search"  >
                         <FontAwesomeIcon icon={faMagnifyingGlass} />
                     </Button>
-                    <Carrito carrito={carrito} handleClean={handleClean} handleDeleteProductCart={handleDeleteProductCart} handleIncreanseQuantity={handleIncreanseQuantity} handleDecreanseQuantity={handleDecreanseQuantity}/>
+                    <Carrito />
 
-                   
+                   {!token ? (
                     <Link  to="/login">
                         <Button  type="button" className="btn btn-dark ms-2" aria-label="Login" title="Login">
                             <FontAwesomeIcon icon={faUser} style={{color: "#fafcff"}} />
 
                         </Button>
-                    </Link>
+                    </Link>):(
+                        <Button  type="button" className="btn btn-dark ms-2" aria-label="Log out" title="Log out" onClick={handleLogout}>
+                            <FontAwesomeIcon icon={faRightFromBracket} style={{color: "#f5f0f0",}} />
+
+                        </Button>
+                    )}
+
 
                     </Form>
                 
@@ -65,7 +132,38 @@ export const Navegation = ({carrito, handleClean, handleDeleteProductCart, handl
             </Container>
         </Navbar>
           
-        
+        {busqueda && (
+            <Container className="mt-4">
+            <h4>Resultados para: "{busqueda}"</h4>
+            {filtrados.length > 0 ? (
+                <Row className="mt-3">
+                {filtrados.map((p) => (
+                    <Col key={p.id} md={3} className="mb-3">
+                    <Card className="p-2 text-center h-100">
+                        <Link to={`/producto/${p.id}`} onClick={()=>setBusqueda("")}>
+                            <Card.Img
+                            variant="top"
+                            src={p.image}
+                            alt={p.title}
+                            style={{ height: "150px", objectFit: "contain" }}
+                            />
+                        </Link>
+
+                        <Card.Body>
+                        <Link to={`/producto/${p.id}`} onClick={()=>setBusqueda("")}>
+                            <Card.Title style={{ fontSize: "0.9rem" }}>{p.title}</Card.Title>
+                        </Link>
+                        <Card.Text className="fs-5 fw-semibold ">${p.price}</Card.Text>
+                        </Card.Body>
+                    </Card>
+                    </Col>
+                ))}
+                </Row>
+            ) : (
+                <p>No se encontraron resultados.</p>
+            )}
+            </Container>
+        )}
         </>
 
     );
