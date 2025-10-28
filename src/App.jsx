@@ -20,6 +20,7 @@ import { Login } from './pages/Login';
 import { Admin } from './pages/Admin';
 import { RutaProtegida } from './components/RutaProtegida';
 import { DetalleProducto } from './pages/DetalleProducto';
+import { SearchResults } from './pages/SearchResults';
 
 function App() {
 
@@ -61,6 +62,8 @@ function App() {
                         <Admin />
                       </RutaProtegida>  
                     } />
+
+                    <Route path="/buscar" element={<SearchResults />} />
                 </Routes>
           </Main>
           <Footer />
