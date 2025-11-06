@@ -49,7 +49,55 @@
 }
 
 
+/* Limitar descripción en tabla */
+.desc-cell {
+  max-width: 150px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
+/* Limitar título también si es largo */
+td:nth-child(2) { /* Columna Title */
+  max-width: 120px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Imagen responsiva */
+td img {
+  max-width: 45px;
+  height: 45px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+/* --- MODO MÓVIL --- */
+@media (max-width: 768px) {
+
+  /* Hacer texto más compacto */
+  td, th {
+    font-size: 0.85rem;
+    padding: 6px;
+  }
+
+  /* Botones uno debajo del otro */
+  .actions-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .actions-cell button {
+    width: 100%;
+  }
+
+  /* Reducir ancho máximo de columnas largas aún más */
+  .desc-cell {
+    max-width: 90px;
+  }
+}
 
 @media screen and (max-width:768px) {
     .height-video {

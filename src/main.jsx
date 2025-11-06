@@ -5,16 +5,19 @@ import App from './App.jsx'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { CarritoProvider } from './context/CarritoContext.jsx'
 import { AuthProvider } from './context/AuthContext.jsx'
+import { ProductsProvider } from './context/ProductsContext.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     
     <Router basename="/Shoply-Franco-Costabile/">
-    <AuthProvider>
-      <CarritoProvider>
-        <App />
-      </CarritoProvider>
-    </AuthProvider>
+    <ProductsProvider>
+      <AuthProvider>
+        <CarritoProvider>
+          <App />
+        </CarritoProvider>
+      </AuthProvider>
+    </ProductsProvider>
     </Router>
       
   </StrictMode>,
