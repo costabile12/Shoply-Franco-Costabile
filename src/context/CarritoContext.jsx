@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect } from "react";
+import Swal from "sweetalert2";
 
 export const CarritoContext=createContext();
 
@@ -9,6 +10,7 @@ export const CarritoProvider = ({children}) => {
         return savedCart ? JSON.parse(savedCart) : [];
     });
 
+    //Funcion para agregar un producto al carrito
     const handleAddToCart = (product) => {
 
         const exist = cart.find((item)=> item.id === product.id);
@@ -19,13 +21,18 @@ export const CarritoProvider = ({children}) => {
             cart.map(item => item.id === product.id ?
                 {...item, cantidad: item.cantidad+1}: item )
         );
-        }else {
+        } else {
         // Si no está en el carrito, lo agego con cantidad 1
-        setCart(
-            [...cart, {...product, cantidad:1}]
-            
-        );
-        alert(`Se agrego ${product.title} al carrito`);
+            setCart(
+                [...cart, {...product, cantidad:1}]
+                
+            );
+            Swal.fire({
+                title: 'Product added!',
+                text: `"${product.title}" has been added to your cart`,
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
         }
 
         
@@ -33,26 +40,46 @@ export const CarritoProvider = ({children}) => {
 
     };
 
+    // Funcion para borrar todo el contenido del carrito
     const handleCleanCart = () => {
         setCart([]);
         
     }
-
+    // Funcion para borrar un producto por id del carrito
     const handleDeleteProductCart = (product) => {
         let newCart = cart.filter((item) => item.id != product.id);
         setCart(newCart);
-        alert(`Se elimino ${product.title} del carrito`)
+        Swal.fire({
+            title: 'Product removed!',
+            text: `"${product.title}" has been removed from your cart`,
+            icon: 'warning',
+            confirmButtonText: 'Got it'
+        });
     };
-
+    // Funcion para incrementar la cantidad de un producto por id en el carrito
     const handleIncreanseQuantity = (id) => {
         setCart(
         cart.map( item => item.id===id ? {...item, cantidad: item.cantidad +1}: item)
         )
     }
 
+    // Funcion para decrementar la cantidad de un producto por id en el carrito
     const handleDecreanseQuantity = (id) => {
+
+        const product=cart.find(item => item.id === id);
+        if(product.cantidad - 1 === 0) {
+            Swal.fire({
+                title: 'Product removed!',
+                text: `"${product.title}" has been removed from your cart`,
+                icon: 'warning',
+                confirmButtonText: 'Got it'
+            });
+        }
+
         setCart(
-        cart.map(item => item.id === id ? {...item, cantidad: item.cantidad-1}:item).filter(item => item.cantidad > 0)
+        cart.map(item => 
+            item.id === id ? {...item, cantidad: item.cantidad-1}:item)
+        .filter(item => item.cantidad > 0)
         )
     }
 
@@ -69,3 +96,4 @@ export const CarritoProvider = ({children}) => {
 
 }
 
+;
