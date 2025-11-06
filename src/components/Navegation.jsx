@@ -61,6 +61,9 @@ export const Navegation = () => {
                         <NavDropdown.Item as={Link} to="/womens-clothing">Women's clothing</NavDropdown.Item>
                         <NavDropdown.Item as={Link} to="/jewelery">Jewelery</NavDropdown.Item>
                         <NavDropdown.Item as={Link} to="/electronics">Electronics</NavDropdown.Item>
+                        <NavDropdown.Divider />
+                        <NavDropdown.Item as={Link} to="/offers" className="fw-bold">Offers</NavDropdown.Item>
+
                     </NavDropdown>
                     <Nav.Link as={Link} to="/about">About</Nav.Link>
                     <Nav.Link as={Link} to="/contact">Contact</Nav.Link>

@@ -1,7 +1,7 @@
 import {Modal, Button, Container, Row,  Col} from "react-bootstrap";
 import { useState } from "react";
 
-export const ModalProduct = ({producto}) => {
+export const ModalProducto = ({producto}) => {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);

@@ -61,8 +61,6 @@ export const Gallery = ({category}) => {
                     lg={3}>
                         <Tarjeta 
                             producto = {product}
-                            key={product.id}
-                            
                         />
                     </Col>
                 ))}

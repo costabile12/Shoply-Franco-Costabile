@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom"
 import { Cargar } from "../components/Cargar";
 import { useContext } from "react";
 import { CarritoContext } from "../context/CarritoContext";
-
+import { ErrorMessage } from "../components/ErrorMessage";
 import "../styles/custom.css"
 
 export const DetalleProducto = () => {
@@ -45,10 +45,12 @@ export const DetalleProducto = () => {
 
     const {handleAddToCart} = useContext(CarritoContext);
     
-        if(cargando) return <Cargar />
-        if(error) return <ErrorMessage mensaje={error} />
-    
     let producto = products.find((p) => p.id == id);
+
+    if(cargando) return <Cargar />
+    if(error || !producto) return <ErrorMessage mensaje={error} />
+    
+    
 
  
 

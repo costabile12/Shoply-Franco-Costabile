@@ -21,6 +21,7 @@ import { Admin } from './pages/Admin';
 import { RutaProtegida } from './components/RutaProtegida';
 import { DetalleProducto } from './pages/DetalleProducto';
 import { SearchResults } from './pages/SearchResults';
+import { Ofertas } from './pages/Ofertas';
 
 function App() {
 
@@ -44,6 +45,8 @@ function App() {
                     <Route path="/jewelery" element={<Jewelery />} />
 
                     <Route path="/electronics" element={<Electronics />} />
+
+                    <Route path='/offers' element={<Ofertas />} />
 
                     <Route path='/exchanges-returns' element={<ExchangesReturns />} />
 
