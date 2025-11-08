@@ -96,34 +96,34 @@ export const ProductsProvider = ({children}) => {
     //Borrar Producto
     const onDelete = async (id) => {
 
-    const result = await Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!"
-    });
-
-    // Solo borra si confirma
-    if (!result.isConfirmed) return;
-
-    try {
-        await fetch(`${API}/${id}`, {
-        method:'DELETE'
+        const result = await Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
         });
 
-        // Actualiza listado sin recargar página
-        setProducts(products.filter((p) => p.id !== id));
+        // Solo borra si confirma
+        if (!result.isConfirmed) return;
 
-        Swal.fire({
-        title: "Deleted!",
-        text: "The product has been removed.",
-        icon: "success"
-        });
+        try {
+            await fetch(`${API}/${id}`, {
+            method:'DELETE'
+            });
 
-    } catch (error) {
+            // Actualiza listado sin recargar página
+            setProducts(products.filter((p) => p.id !== id));
+
+            Swal.fire({
+            title: "Deleted!",
+            text: "The product has been removed.",
+            icon: "success"
+            });
+
+        } catch (error) {
         Swal.fire({
         title: "Error!",
         text: "There was a problem deleting the product.",
