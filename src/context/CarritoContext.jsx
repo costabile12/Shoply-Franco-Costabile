@@ -16,7 +16,7 @@ export const CarritoProvider = ({children}) => {
         const exist = cart.find((item)=> item.id === product.id);
 
         if(exist){
-        //Si ya está, aumentamos la cantidad
+        //Si ya está, aumento la cantidad
         setCart(
             cart.map(item => item.id === product.id ?
                 {...item, cantidad: item.cantidad+1}: item )

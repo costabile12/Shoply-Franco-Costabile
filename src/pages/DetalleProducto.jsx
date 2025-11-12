@@ -7,6 +7,7 @@ import { CarritoContext } from "../context/CarritoContext";
 import { ErrorMessage } from "../components/ErrorMessage";
 import "../styles/custom.css"
 
+
 export const DetalleProducto = () => {
 
     const {id} = useParams();
@@ -59,13 +60,13 @@ export const DetalleProducto = () => {
         <Container className="my-5 mobile-margin">
             <Row className="gap-4">
                 <Col className="d-flex justify-content-center" xs={12} md={4}>
-                <Card className="p-2 shadow h-100">
-                    
-                        <Card.Img src={producto.image} alt={producto.title} className="w-100 h-100" />
-                    
-
-                </Card>
-                    
+                    <Card className="p-2 shadow h-100">
+                        <Card.Img 
+                        src={producto.image} 
+                        alt={producto.title} 
+                        className="w-100 h-100"
+                        />
+                    </Card>
                 </Col>
                 <Col xs={12} md={6} className="mx-auto">
                     <h1>{producto.title}</h1>
@@ -81,7 +82,6 @@ export const DetalleProducto = () => {
                 </Col>
             </Row>
 
-            
         </Container>
     )
 }

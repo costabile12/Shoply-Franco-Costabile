@@ -22,9 +22,9 @@ export const Tarjeta = ({ producto }) => {
       <Card.Body className="d-flex flex-column justify-content-between flex-grow-1">
         
         <Card.Title className="mb-2 fs-6 text">{producto.title}</Card.Title>
-        <Card.Text className="fs-5 fw-bold mt-3 ">${producto.price}</Card.Text>
+       
+          <Card.Text className="fs-5 fw-bold mt-3 ">${producto.price}</Card.Text>
 
-        
         <Link to={`/producto/${producto.id}`}>
           <Button className="w-100 mt-2" variant="primary">+Info</Button>
         </Link>

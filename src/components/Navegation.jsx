@@ -54,7 +54,7 @@ export const Navegation = () => {
                 
                 <Navbar.Toggle />
                 <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="me-auto fw-semibold gap-3 ms-auto">
+                <Nav className="me-auto fw-semibold gap-3 ms-auto mb-3">
                     <Nav.Link as={Link} to="/">Home</Nav.Link>
                     <NavDropdown title="Shop" id="basic-nav-dropdown" >
                         <NavDropdown.Item as={Link} to="/mens-clothing">Men's clothing</NavDropdown.Item>

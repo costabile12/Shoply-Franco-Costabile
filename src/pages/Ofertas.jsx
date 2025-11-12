@@ -36,16 +36,20 @@ export const Ofertas = () => {
                                 <Card.Body className="d-flex flex-column justify-content-between flex-grow-1">
                                     
                                     <Card.Title className="mb-2 fs-6 text">{product.title}</Card.Title>
-                                    <Card.Text className="fs-5 fw-bold mt-3 ">${product.price}</Card.Text>
 
-                                    
-                                    
+                                    <Card.Text className="mt-3 d-flex align-items-center justify-content-between">
+                                        <span className="fs-5 fw-bold">${product.price}</span>
+                                        {product.stock === 0 && (
+                                            <span className="text-danger fw-semibold">Out of Stock</span>
+                                        )}
+                                        
+                                    </Card.Text>
+
                                     <ModalProducto producto={product}/>
                                     
-
                                     <Button
                                     variant="secondary"
-                                    className="w-100 mt-2"
+                                    className={`w-100 mt-2 ${product.stock === 0 ? "disabled":""}`} 
                                     onClick={() => handleAddToCart(product)}
                                     >
                                     Add to cart
@@ -57,11 +61,11 @@ export const Ofertas = () => {
                     ))}
 
                 </Row>
-        </Container>
+            </Container>
 
-        <Modal>
-            
-        </Modal>
+            <Modal>
+                
+            </Modal>
         </div>
     );
 }
