@@ -49,7 +49,7 @@ export const SearchResults = () => {
         <Container className="mt-5">
             {filtrados && (
                 <h4>
-                    Resultados para: "{busqueda}"
+                    Results for: "{busqueda}"
                 </h4>
             )}
             <Row className="mt-3">
@@ -61,7 +61,7 @@ export const SearchResults = () => {
                 ))) :
                 (
                     <p>
-                        No se encontraron productos.
+                        No products found.
                     </p>
                 )
             }
