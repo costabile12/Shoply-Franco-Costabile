@@ -98,6 +98,12 @@ td img {
     max-width: 90px;
   }
 }
+ /*PANEL DE FILTROS*/
+.filters-panel {
+    position: sticky;
+    top: 20px;
+    height: fit-content;
+}
 
 @media screen and (max-width:768px) {
     .height-video {
