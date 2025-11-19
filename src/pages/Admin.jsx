@@ -60,7 +60,7 @@ export const Admin = () => {
             image: product.image
         });
         setShow(true);
-};
+    };
 
     return(
         <Container className="my-5">
