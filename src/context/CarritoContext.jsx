@@ -1,7 +1,8 @@
 import { createContext, useState, useEffect } from "react";
 import Swal from "sweetalert2";
+import { ToastContainer, toast } from 'react-toastify';
 
-export const CarritoContext=createContext();
+export const CarritoContext = createContext();
 
 export const CarritoProvider = ({children}) => {
 
@@ -27,12 +28,7 @@ export const CarritoProvider = ({children}) => {
                 [...cart, {...product, cantidad:1}]
                 
             );
-            Swal.fire({
-                title: 'Product added!',
-                text: `"${product.title}" has been added to your cart`,
-                icon: 'success',
-                confirmButtonText: 'OK'
-            });
+            toast.success(`"${product.title}" has been added to your cart`);
         }
 
         
@@ -90,6 +86,7 @@ export const CarritoProvider = ({children}) => {
     return(
         <CarritoContext.Provider value={{cart, handleAddToCart, handleCleanCart, handleDeleteProductCart, handleIncreanseQuantity, handleDecreanseQuantity}}>
             {children}
+            <ToastContainer position="top-right" autoClose={1500} />
         </CarritoContext.Provider>
     )
 

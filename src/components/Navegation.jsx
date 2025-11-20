@@ -83,7 +83,7 @@ export const Navegation = () => {
                     onSubmit={handleSearch}>
                     <Form.Control 
                     type="text" 
-                    placeholder="Search" 
+                    placeholder="Search..." 
                     className="me-2"
                     value={busqueda}
                     onChange={(e)=>setBusqueda(e.target.value)} />

@@ -6,6 +6,8 @@ import { useContext, useState } from "react"
 import { ProductsContext } from "../context/ProductsContext"
 import '../styles/custom.css'
 import { CrudProducts } from './CrudPoducts';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faFilter} from '@fortawesome/free-solid-svg-icons'
 
 export const ListProducts = ({onEditProduct}) => {
     const {products, error, cargando} = useContext(ProductsContext); 
@@ -39,7 +41,9 @@ export const ListProducts = ({onEditProduct}) => {
 
     return(
         <div>
-            <button className='btn btn-secondary mb-3' onClick={()=>setShowFilters(!showFilters)}>Filters</button>
+            <button className='btn btn-ligth border mb-3' onClick={()=>setShowFilters(!showFilters)}>
+                <FontAwesomeIcon icon={faFilter} style={{color: "#333",}} />
+            </button>
             <Row>
                 
                 {/* PANEL DE FILTROS */}
