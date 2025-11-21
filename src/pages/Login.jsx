@@ -11,15 +11,12 @@ export const Login = () => {
     const {login} = useAuthContext();
     const navigate = useNavigate();
     
-
-
-
     const handleLogin = (e) => {
         
         e.preventDefault();
 
         const result = login(user, password)
-        
+        // Login incorrecto
         if (!result.success) {
             Swal.fire({
                 icon: "error",
@@ -31,7 +28,6 @@ export const Login = () => {
         }
 
         //Login correcto 
-            
         Swal.fire({
             title: "Login successful!!",
             text: `Welcome back, ${result.user.username}!`,

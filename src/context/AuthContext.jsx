@@ -43,7 +43,7 @@ export const AuthProvider = ({children}) => {
 
         setToken(newToken);
         setRole(userFound.role);
-        setUser(userFound);   // ❗ SE GUARDA EL USUARIO
+        setUser(userFound);  
 
         return { success: true, user: userFound };
     };
