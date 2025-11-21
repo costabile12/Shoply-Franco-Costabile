@@ -12,29 +12,42 @@ export const Login = () => {
     const navigate = useNavigate();
     
 
+
+
     const handleLogin = (e) => {
         
         e.preventDefault();
-        
-        if(user === "admin" && password === "1234") {
-            login(user);
-            Swal.fire({
-                title: "Login successful!!",
-                text: "Welcome back, admin!",
-                icon: "success",
-                timer: 2000,
-                showConfirmButton: false,
-            });
 
-            navigate("/admin");
-        } else {
+        const result = login(user, password)
+        
+        if (!result.success) {
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
-                text: "Incorrect username or password",
-                
+                text: `${result.message}`,
+                            
             });
+            return;
         }
+
+        //Login correcto 
+            
+        Swal.fire({
+            title: "Login successful!!",
+            text: `Welcome back, ${result.user.username}!`,
+            icon: "success",
+            timer: 2000,
+            showConfirmButton: false,
+        });
+
+        //Manejo de redireccion 
+        if (result.user.role === "admin") {
+            navigate("/admin");
+        } else {
+            navigate("/"); 
+        }
+            
+
     };
 
     return (

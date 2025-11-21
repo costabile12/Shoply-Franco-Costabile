@@ -14,8 +14,7 @@ import { useState } from "react";
 export const Navegation = () => {
 
     const navigate = useNavigate();
-    const {token} = useAuthContext();
-    const {logout} = useAuthContext();
+    const { token, role, logout } = useAuthContext();
     const [busqueda, setBusqueda] = useState("");
 
     const handleLogout = () => {
@@ -69,14 +68,11 @@ export const Navegation = () => {
                     <Nav.Link as={Link} to="/contact">Contact</Nav.Link>
 
                     {/* Solo se muestra si esta autenticado */}
-                    {token && (
+                    {role === "admin" && (
                         <Nav.Link as={Link} to="/admin" >Admin</Nav.Link>
                     ) }
                     
                 </Nav>
-
-                
-                
                 
                     <Form 
                     className="d-flex ms-auto align-items-center"  
@@ -91,6 +87,8 @@ export const Navegation = () => {
                     type="submit" className="btn btn-dark mx-2" aria-label="Search" title="Search">
                         <FontAwesomeIcon icon={faMagnifyingGlass} />
                     </Button>
+
+                    
                     <Carrito />
 
                    {!token ? (
