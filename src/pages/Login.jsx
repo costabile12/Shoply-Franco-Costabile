@@ -58,7 +58,7 @@ export const Login = () => {
                     <Form.Label>Username</Form.Label>
                     <Form.Control 
                     type="text" 
-                    placeholder="Enter your username" 
+                    placeholder="Enter your username Ej: admin/lucia/carlos" 
                     required
                     autoComplete="username"
                     onChange={(e)=>setUsuario(e.target.value)} />
@@ -69,7 +69,7 @@ export const Login = () => {
                     <Form.Label>Password</Form.Label>
                     <Form.Control 
                     type="password" 
-                    placeholder="Enter your password" 
+                    placeholder="Enter your password Ej: 1234" 
                     required
                     autoComplete="current-password"
                     onChange={(e)=>setPassword(e.target.value)} />

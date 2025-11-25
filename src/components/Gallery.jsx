@@ -5,15 +5,15 @@ import { Cargar } from "./Cargar";
 import { ErrorMessage } from "./ErrorMessage";
 import { useState,useEffect } from "react";
 import "../styles/custom.css"
+import { Paginacion } from "./Paginacion";
 
 export const Gallery = ({category}) => {
-    
-
+  
     const [products, setProducts] = useState([]);
     const [error, setError] = useState(null);
     const [cargando, setCargando] = useState(true);
 
-      useEffect(()=>{
+    useEffect(()=>{
     
         const fetchProducts = async () => {
           let url = "https://fakestoreapi.com/products";
@@ -42,7 +42,21 @@ export const Gallery = ({category}) => {
     
         fetchProducts();
     
-      },[category]);
+    },[category]);
+
+    
+    const productosPorPagina = 8;
+    const [paginaActual, setPaginaActual] = useState(1);
+
+    //Calcular el indice de los productos a mostrar en la pagina actual
+    const indiceUltimoProducto = paginaActual * productosPorPagina;
+    const indicePrimerProducto = indiceUltimoProducto - productosPorPagina;
+
+    const productosActuales = products.slice(indicePrimerProducto, indiceUltimoProducto);
+
+    //Cambiar de pagina
+    const totalPages = Math.ceil(products.length / productosPorPagina);
+
 
     if(cargando) return <Cargar />
     if(error) return <ErrorMessage mensaje={error} />
@@ -52,7 +66,7 @@ export const Gallery = ({category}) => {
         <Container className="my-5 mobile-margin">
             <Row className="g-4  ">
                 
-                {products.map((product)=>(
+                {productosActuales.map((product)=>(
                     <Col   
                     key={product.id} 
                     xs={{ span: 10, offset: 1 }} 
@@ -66,6 +80,11 @@ export const Gallery = ({category}) => {
                 ))}
 
             </Row>
+            <Paginacion 
+              totalPages={totalPages} 
+              paginaActual={paginaActual}
+              onPageChange={setPaginaActual}
+              />
         </Container>
     );
 }

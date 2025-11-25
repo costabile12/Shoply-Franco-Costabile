@@ -1,22 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import { useContext } from "react";
 import { ProductsContext } from "../context/ProductsContext";
-import { Container, Row, Col, Card, Button, Modal } from "react-bootstrap";
+import { Container, Row, Col, Card, Button, Modal} from "react-bootstrap";
 import { CarritoContext } from "../context/CarritoContext";
 import {ModalProducto} from "../components/ModalProducto";
+import { FaArrowLeft } from "react-icons/fa";
+import { FaArrowRight } from "react-icons/fa";
+import { Paginacion } from "../components/Paginacion";
 
 export const Ofertas = () => {
 
+    const productosPorPagina = 8 
+    const [paginaActual, setPaginaActual] = useState(1);
+
     const {products} = useContext(ProductsContext);
     const {handleAddToCart} = useContext(CarritoContext);
+
+    //Calcular el indice de los productos a mostrar en la pagina actual
+    const indiceUltimoProducto = paginaActual * productosPorPagina;
+    const indicePrimerProducto = indiceUltimoProducto - productosPorPagina;
+
+    const productosActuales = products.slice(indicePrimerProducto, indiceUltimoProducto);
+
+    //Cambiar de pagina
+    const totalPages = Math.ceil(products.length / productosPorPagina);
+
+
 
     return(
         <div>
             <h1 className="ms-5 mt-3">Offers</h1>
             <Container className="my-5 mobile-margin">
-                <Row className="g-4  ">
+                <Row className="g-4  mb-5">
                     
-                    {products.map((product)=>(
+                    {productosActuales.map((product)=>(
                         <Col   
                         key={product.id} 
                         xs={{ span: 10, offset: 1 }} 
@@ -61,6 +78,12 @@ export const Ofertas = () => {
                     ))}
 
                 </Row>
+                
+                <Paginacion 
+                totalPages={totalPages} 
+                paginaActual={paginaActual}
+                onPageChange={setPaginaActual}
+                />
             </Container>
 
             <Modal>
