@@ -100,7 +100,7 @@ export const SearchResults = () => {
 
             <Row className="mt-3">
                 {showFilters && (
-                    <Col md={2} className="mb-4">
+                    <Col md={3} className="mb-4">
                             <Card className='p-3 mb-3 filters-panel'>
                                 <h5 className='mb-3'>Filters</h5>
                                 <InputGroup className='mb-2'>
@@ -129,11 +129,14 @@ export const SearchResults = () => {
                     </Col>
                 )}
 
-                <Col md={showFilters ? 10:12}>
+                <Col md={showFilters ? 9:12}>
                     <Row>
                         {productosActuales.length > 0 ? (
                         productosActuales.map((p)=>(
-                            <Col key={p.id} md={6} lg={4} xl={3} className="mb-3">
+                            <Col key={p.id} 
+                            md={6} 
+                            lg={showFilters ? 6:4} 
+                            xl={showFilters ? 4:3} className="mb-3">
                                 <Tarjeta producto={p}/>
                             </Col>
                         ))) :
@@ -146,14 +149,16 @@ export const SearchResults = () => {
                     </Row>
                     
                     
-                        <Paginacion 
-                        totalPages={totalPages} 
-                        paginaActual={paginaActual}
-                        onPageChange={setPaginaActual}
-                        />
-                    
+
 
                 </Col>
+
+                <Paginacion 
+                totalPages={totalPages} 
+                paginaActual={paginaActual}
+                onPageChange={setPaginaActual}
+                />
+                    
 
 
             </Row>
