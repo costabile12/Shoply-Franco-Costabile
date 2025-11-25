@@ -70,8 +70,8 @@ export const Formulario = () => {
 
     return(
         <Form noValidate validated={validated} onSubmit={handleSubmit} className="my-4 w-100 ">
-            <Row className="mb-3">
-                <Form.Group as={Col} md="4">
+            <Row className="mb-2">
+                <Form.Group as={Col} md="4" className="mb-2">
                     <Form.Label>First Name</Form.Label>
                     <Form.Control
                         required
@@ -86,7 +86,7 @@ export const Formulario = () => {
                     </Form.Control.Feedback>
                 </Form.Group>
 
-                <Form.Group as={Col} md="4">
+                <Form.Group as={Col} md="4" className="mb-2">
                     <Form.Label>Last Name</Form.Label>
                     <Form.Control
                         required
@@ -101,7 +101,7 @@ export const Formulario = () => {
                     </Form.Control.Feedback>
                 </Form.Group>
 
-                <Form.Group as={Col} md="4">
+                <Form.Group as={Col} md="4" className="mb-2">
                     <Form.Label>Email</Form.Label>
                     <Form.Control
                         required
@@ -119,8 +119,8 @@ export const Formulario = () => {
                 
             </Row>
             
-            <Row className="mb-3">
-                <Form.Group as={Col} md="6">
+            <Row className="mb-2">
+                <Form.Group as={Col} md="6" className="mb-2">
                     <Form.Label>Province</Form.Label>
                     <Form.Select 
                     value={provincia}
@@ -140,7 +140,7 @@ export const Formulario = () => {
                         </Form.Control.Feedback>
                 </Form.Group>
 
-                <Form.Group as={Col} md="6">
+                <Form.Group as={Col} md="6" className="mb-2">
                     <Form.Label>Phone</Form.Label>
                     <Form.Control
                     type="text"
@@ -156,8 +156,9 @@ export const Formulario = () => {
                     Please write your phone number.
                 </Form.Control.Feedback>
             </Row>
-            <Row>
-                <Form.Group as={Col} md="12"  className="mb-3">
+            
+            <Row className="mb-2">
+                <Form.Group as={Col} md="12"  className="mb-2">
                     <Form.Label>
                         Write your Message
                     </Form.Label>
@@ -176,7 +177,7 @@ export const Formulario = () => {
             </Row>
             
             <div className="d-flex d-flex justify-content-end ">
-                <Button type="submit" variant="dark"  >Submit form</Button>    
+                <Button type="submit" variant="dark btn-lg">Submit form</Button>    
             </div>
             
 

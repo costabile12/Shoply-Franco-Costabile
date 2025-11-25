@@ -7,9 +7,10 @@ import { Tarjeta } from "../components/Tarjeta";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faFilter} from "@fortawesome/free-solid-svg-icons"
 import "../styles/custom.css"
+import { Paginacion } from "../components/Paginacion";
 
 export const SearchResults = () => {
-
+    
     const [products, setProducts] = useState([]);
     const [cargando, setCargando] = useState(true);
     const [error, setError] = useState(null);
@@ -19,6 +20,9 @@ export const SearchResults = () => {
     const queryParams = new URLSearchParams(location.search);
     const busqueda = queryParams.get("query") || "";
     const [showFilters, setShowFilters] = useState(false);
+    const productosPorPagina = 8;
+    const [paginaActual, setPaginaActual] = useState(1);
+
 
 
     useEffect(()=>{
@@ -45,6 +49,15 @@ export const SearchResults = () => {
         fetchProducts();
     },[busqueda]);
 
+    useEffect(()=>{
+        setPaginaActual(1);
+    }, [busqueda]);
+
+
+    useEffect(()=>{
+        setPaginaActual(1);
+    },[minPrice, maxPrice])
+
     let filtrados = products
     .filter((product) => product.title.toLowerCase().includes(busqueda.toLowerCase()))
     .filter(product => 
@@ -53,6 +66,17 @@ export const SearchResults = () => {
     .filter(product =>
         maxPrice === "" || product.price <= Number(maxPrice)
     )
+
+
+    //Calcular el indice de los productos a mostrar en la pagina actual
+    const indiceUltimoProducto = paginaActual * productosPorPagina;
+    const indicePrimerProducto = indiceUltimoProducto - productosPorPagina;
+
+    const productosActuales = filtrados.slice(indicePrimerProducto, indiceUltimoProducto);
+
+    //Cambiar de pagina
+    const totalPages = Math.ceil(filtrados.length / productosPorPagina);
+
 
     
     if(cargando) return <Cargar />
@@ -107,19 +131,27 @@ export const SearchResults = () => {
 
                 <Col md={showFilters ? 10:12}>
                     <Row>
-                        {filtrados.length > 0 ? (
-                        filtrados.map((p)=>(
+                        {productosActuales.length > 0 ? (
+                        productosActuales.map((p)=>(
                             <Col key={p.id} md={6} lg={4} xl={3} className="mb-3">
                                 <Tarjeta producto={p}/>
                             </Col>
                         ))) :
                         (
-                            <p>
-                                No products found.
+                            <p className="fs-4 fw-medium fst-italic ">
+                                Products not found.
                             </p>
                         )
                     }
                     </Row>
+                    
+                    
+                        <Paginacion 
+                        totalPages={totalPages} 
+                        paginaActual={paginaActual}
+                        onPageChange={setPaginaActual}
+                        />
+                    
 
                 </Col>
 

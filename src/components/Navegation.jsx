@@ -43,7 +43,7 @@ export const Navegation = () => {
     return(
         <>
         <Navbar bg="light" expand="lg" className="p-1" expanded={expanded}  onToggle={(val) => setExpanded(val)}>
-            <Container >
+            <Container>
 
                 <Navbar.Brand as={Link} to="/" className="d-flex align-items-center gap-2 mx-3 mb-1" onClick={() => setExpanded(false)}>
                 <img src={Logo} alt="Logo" width={55} height={55} />
@@ -53,7 +53,7 @@ export const Navegation = () => {
                 
                 <Navbar.Toggle />
                 <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="me-auto fw-semibold gap-3 ms-auto mb-3">
+                <Nav className="me-auto fw-semibold gap-3 ms-auto">
                     <Nav.Link as={Link} to="/" onClick={()=>setExpanded(false)}>Home</Nav.Link>
                     <NavDropdown title="Shop" id="basic-nav-dropdown" >
                         <NavDropdown.Item as={Link} to="/mens-clothing" onClick={()=>setExpanded(false)}>Men's clothing</NavDropdown.Item>
@@ -84,7 +84,10 @@ export const Navegation = () => {
                     value={busqueda}
                     onChange={(e)=>setBusqueda(e.target.value)} />
                     <Button 
-                    type="submit" className="btn btn-dark mx-2" aria-label="Search" title="Search">
+                    type="submit" 
+                    className="btn btn-dark mx-2" 
+                    aria-label="Search" 
+                    title="Search">
                         <FontAwesomeIcon icon={faMagnifyingGlass} />
                     </Button>
 
@@ -93,14 +96,20 @@ export const Navegation = () => {
 
                    {!token ? (
                     <Link  to="/login" onClick={()=>setExpanded(false)}>
-                        <Button  type="button" className="btn btn-dark ms-2" aria-label="Login" title="Login" >
+                        <Button  
+                        type="button" 
+                        className="btn btn-dark ms-2" 
+                        aria-label="Login" 
+                        title="Login" >
                             <FontAwesomeIcon icon={faUser} style={{color: "#fafcff"}} />
-
                         </Button>
                     </Link>):(
-                        <Button  type="button" className="btn btn-dark ms-2" aria-label="Log out" title="Log out" onClick={handleLogout}>
+                        <Button  
+                        type="button" 
+                        className="btn btn-dark ms-2" 
+                        aria-label="Log out" title="Log out" 
+                        onClick={handleLogout}>
                             <FontAwesomeIcon icon={faRightFromBracket} style={{color: "#f5f0f0",}} />
-
                         </Button>
                     )}
 

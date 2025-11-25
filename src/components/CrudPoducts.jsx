@@ -64,7 +64,9 @@ export const CrudProducts = ({products, onEditProduct}) => {
                     </Table>            
                 </div>
             ):
-                <p className="fs-4 fst-italic">No se encontraron productos.</p>
+                <p className="fs-4 fw-medium fst-italic ">
+                    Products not found.
+                </p>
             }
         
         </>

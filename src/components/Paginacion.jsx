@@ -1,6 +1,7 @@
 import React from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
+
 export const Paginacion = ({ totalPages, paginaActual, onPageChange }) => {
 
     if (totalPages <= 1) return null;
@@ -22,7 +23,7 @@ export const Paginacion = ({ totalPages, paginaActual, onPageChange }) => {
                 <FaArrowLeft />
             </button>
 
-            {/* --- Vista de ESCRITORIO: Mostrar TODAS las páginas --- */}
+            {/* Vista de ESCRITORIO: Mostrar TODAS las páginas  */}
             <div className="d-none d-md-flex">
                 {Array.from({ length: totalPages }, (_, index) => (
                     <button
@@ -39,9 +40,9 @@ export const Paginacion = ({ totalPages, paginaActual, onPageChange }) => {
                 ))}
             </div>
 
-            {/* --- Vista MÓVIL: Mostrar solo número actual --- */}
-            <span className="d-md-none fw-bold px-3">
-                {paginaActual} / {totalPages}
+            {/* Vista MÓVIL: Mostrar solo número actual */}
+            <span className="d-md-none fw-bold px-3 ">
+                <button className="btn mx-1 border-dark fw-bold">{paginaActual}</button> - <button className="btn mx-1 border-dark fw-bold">{totalPages}</button> 
             </span>
 
             {/* Botón Siguiente */}
