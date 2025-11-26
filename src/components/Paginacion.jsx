@@ -18,7 +18,7 @@ export const Paginacion = ({ totalPages, paginaActual, onPageChange }) => {
     return (
     <>
     {/* PAGINACION PARA ESCRITORIO */}
-        <Pagination className="justify-content-center my-3 d-none d-md-flex">
+        <Pagination className="justify-content-center my-3 d-none d-md-flex my-5">
             {/* Volver al la primera pagina */}
             <Pagination.First
             disabled={paginaActual === 1}
@@ -55,7 +55,7 @@ export const Paginacion = ({ totalPages, paginaActual, onPageChange }) => {
         
             {/* paginaActual */}
             {paginaActual !== 1 && paginaActual !== totalPages && (
-                <Pagination.Item active>
+                <Pagination.Item active >
                     {paginaActual}
                 </Pagination.Item>
             )}
@@ -100,7 +100,7 @@ export const Paginacion = ({ totalPages, paginaActual, onPageChange }) => {
         </Pagination>
 
         {/* PAGINACION PARA MOVILES */}
-        <Pagination className="justify-content-center my-3 d-flex d-md-none">
+        <Pagination className="justify-content-center my-3 d-flex d-md-none my-5">
             {/* Volver al la primera pagina */}
             <Pagination.First
             disabled={paginaActual === 1}
@@ -116,6 +116,7 @@ export const Paginacion = ({ totalPages, paginaActual, onPageChange }) => {
                 {paginaActual}
             </Pagination.Item>
             
+            {/* Separacion / */}
             <Pagination.Item >
                 /
             </Pagination.Item>
