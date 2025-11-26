@@ -17,7 +17,7 @@ export const Paginacion = ({ totalPages, paginaActual, onPageChange }) => {
 
     return (
     <>
-    {/* PAGINACION PARA ESCRITORIO */}
+        {/* PAGINACION PARA ESCRITORIO */}
         <Pagination className="justify-content-center my-3 d-none d-md-flex my-5">
             {/* Volver al la primera pagina */}
             <Pagination.First
