@@ -64,7 +64,7 @@ export const DetalleProducto = () => {
                         <Card.Img 
                         src={producto.image} 
                         alt={producto.title} 
-                        className="card-img-fixed"
+                        className="w-100 h-100 "
                         />
                     </Card>
                 </Col>

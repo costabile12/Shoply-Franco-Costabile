@@ -105,6 +105,8 @@ td img {
     height: fit-content;
 }
 
+
+
 @media screen and (max-width:768px) {
     .height-video {
         height: clamp(12.5rem, 8.036rem + 22.32vw, 18.75rem);
@@ -128,12 +130,7 @@ td img {
 
 }
 
-.card-img-fixed {
-    width: 100%;
-    height: 500px;      
-    object-fit: cover;   /* Corta y mantiene proporción */
-    border-radius: 10px; 
-}
+
 
 @media screen and (min-width:768px) {
     .title-responsive-nav {
